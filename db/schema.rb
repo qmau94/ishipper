@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 20160802080708) do
     t.integer  "status"
     t.integer  "role"
     t.float    "rate",         limit: 24
+    t.string   "pin"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
