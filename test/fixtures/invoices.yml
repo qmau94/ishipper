@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  address: MyString
+  latitude: 1.5
+  longitude: 1.5
+  delivery_time: MyString
+  distance: 1.5
+  description: MyString
+  price: 1.5
+  shipping_price: 1.5
+  status: 1
+  weight: 1.5
+  references: MyString
+  users: MyString
+
+two:
+  name: MyString
+  address: MyString
+  latitude: 1.5
+  longitude: 1.5
+  delivery_time: MyString
+  distance: 1.5
+  description: MyString
+  price: 1.5
+  shipping_price: 1.5
+  status: 1
+  weight: 1.5
+  references: MyString
+  users: MyString

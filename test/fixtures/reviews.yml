@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  owner_id: 1
+  recipient_id: 1
+  invoice_id: 1
+  type: 1
+  rating_point: 1.5
+  content: MyString
+
+two:
+  owner_id: 1
+  recipient_id: 1
+  invoice_id: 1
+  type: 1
+  rating_point: 1.5
+  content: MyString
