@@ -12,6 +12,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.integer :status
       t.integer :role
       t.float :rate
+      t.string :pin
 
       t.timestamps
     end
