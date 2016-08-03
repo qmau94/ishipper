@@ -3,7 +3,6 @@ class CreateUsers < ActiveRecord::Migration[5.0]
     create_table :users do |t|
       t.string :name
       t.string :email
-      t.string :password
       t.string :address
       t.float :latitude
       t.float :longitude
@@ -13,6 +12,8 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.integer :role
       t.float :rate
       t.string :pin
+      t.string :authentication_token
+      t.boolean :signed_in
 
       t.timestamps
     end

@@ -1,4 +1,9 @@
 class User < ApplicationRecord
+  acts_as_token_authenticatable
+
+  devise :database_authenticatable, :recoverable,
+    :rememberable, :trackable, :validatable
+
   has_many :invoices, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :notifications, dependent: :destroy
