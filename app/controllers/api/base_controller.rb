@@ -9,7 +9,7 @@ class Api::BaseController < ActionController::API
     entity = SimpleTokenAuthentication::Entity.new User
 
     if authenticate_entity_from_token!(entity).nil?
-      render json: {message: I18n.t("api.invalid_token")}, status: 401
+      render json: {message: I18n.t("api.invalid_token"), data: {}, code: 0}, status: 401
     end
   end
 end
