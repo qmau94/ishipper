@@ -11,9 +11,11 @@ gem "jbuilder", "~> 2.5"
 gem "twilio-ruby"
 gem "config"
 gem "bcrypt"
+gem "devise"
+gem "simple_token_authentication"
 
 group :development, :test do
-  gem "byebug", platform: :mri
+  gem "pry"
 end
 
 group :development do

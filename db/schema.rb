@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802080708) do
+ActiveRecord::Schema.define(version: 20160803021915) do
 
   create_table "invoices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -87,18 +87,30 @@ ActiveRecord::Schema.define(version: 20160802080708) do
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "password"
     t.string   "address"
-    t.float    "latitude",     limit: 24
-    t.float    "longitude",    limit: 24
+    t.float    "latitude",               limit: 24
+    t.float    "longitude",              limit: 24
     t.string   "phone_number"
     t.string   "plate_number"
     t.integer  "status"
     t.integer  "role"
-    t.float    "rate",         limit: 24
+    t.float    "rate",                   limit: 24
     t.string   "pin"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "authentication_token"
+    t.boolean  "signed_in"
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.string   "encrypted_password",                default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                     default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.index ["phone_number"], name: "index_users_on_phone_number", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
   add_foreign_key "invoices", "users"

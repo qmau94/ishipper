@@ -1,0 +1,5 @@
+en:
+  api:
+    sign_in_fail: "Invalid email, password, or combination"
+    missing_params: "Missing user parameter"
+    invalid_token: "Invalid token, email, or combination"
