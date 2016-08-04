@@ -14,8 +14,8 @@ class Api::SessionsController < Devise::SessionsController
     if user.valid_password? user_params[:password]
       sign_in user, store: false
       user.update_attributes signed_in: true
-      render json: {auth_token: user.authentication_token, phone_number: user.phone_number},
-        status: :ok
+      render json: {message: t("api.sign_in.success"), data: {auth_token: user.authentication_token,
+        phone_number: user.phone_number}, code: 1}, status: :ok
       return
     end
     invalid_login_attempt
@@ -25,20 +25,20 @@ class Api::SessionsController < Devise::SessionsController
     user = User.find_for_database_authentication phone_number: user_params[:phone_number]
     if user.signed_in? && user.authentication_token == user_params[:authentication_token]
       sign_out user
-      render json: {}, status: :ok
+      render json: {message: t("api.sign_out.success"), data: {}, code: 1}, status: :ok
     else
-      render json: {message: t("api.invalid_token")}, status: 401
+      render json: {message: t("api.invalid_token"), data: {}, code: 0}, status: 401
     end
   end
 
   protected
   def ensure_params_exist
     return unless params[:user].blank?
-    render json: {error: t("api.missing_params")}, status: 422
+    render json: {message: t("api.missing_params"), data: {}, code: 0}, status: 422
   end
 
   def invalid_login_attempt
-    render json: {error: t("api.sign_in_fail")}, status: 401
+    render json: {message: t("api.sign_in.fails"), data: {}, code: 0}, status: 401
   end
 
   private
