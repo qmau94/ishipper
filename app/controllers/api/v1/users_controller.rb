@@ -1,7 +1,17 @@
 class Api::V1::UsersController < Api::BaseController
-  before_action :authenticate_with_token!, only: [:update]
+  before_action :authenticate_with_token!, only: [:index, :update]
   before_action :find_user, only: :update
   before_action :correct_user, only: :update
+
+  def index
+    users = if current_user.shop?
+      User.shipper
+    elsif current_user.shipper?
+      User.shop
+    end
+
+    render json: {message: "", data: {users: users}, code: 1}, status: 200
+  end
 
   def update
     if @user.update_attributes user_params

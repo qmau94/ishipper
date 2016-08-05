@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     devise_for :users, only: :session
 
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
-      resources :users, only: :update
+      resources :users, only: [:update, :index]
     end
   end
 end
