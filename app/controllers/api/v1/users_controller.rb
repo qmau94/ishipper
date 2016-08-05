@@ -1,5 +1,4 @@
 class Api::V1::UsersController < Api::BaseController
-  before_action :authenticate_with_token!, only: [:index, :update]
   before_action :find_user, only: :update
   before_action :correct_user, only: :update
 
