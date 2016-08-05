@@ -11,6 +11,12 @@ class User < ApplicationRecord
   ATTRIBUTES_PARAMS = [:phone_number, :email, :address, :latitude,
     :longitude, :plate_number, :status, :role, :rate, :pin,
     :password, :password_confirmation]
+  
+  validates :phone_number, uniqueness: true
+
+  def email_required?
+    false
+  end
 
   enum role: ["admin", "shop", "shipper"]
 

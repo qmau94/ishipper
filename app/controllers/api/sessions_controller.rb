@@ -14,8 +14,7 @@ class Api::SessionsController < Devise::SessionsController
     if user.valid_password? user_params[:password]
       sign_in user, store: false
       user.update_attributes signed_in: true
-      render json: {message: t("api.sign_in.success"), data: {auth_token: user.authentication_token,
-        phone_number: user.phone_number}, code: 1}, status: :ok
+      render json: {message: t("api.sign_in.success"), data: {user: user}, code: 1}, status: :ok
       return
     end
     invalid_login_attempt
