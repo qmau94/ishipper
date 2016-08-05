@@ -8,3 +8,6 @@ en:
     missing_params: "Missing user parameter"
     invalid_token: "Invalid token, email, or combination"
     not_authenticated: "Not authenticated"
+    sign_up: 
+      success: "Sign up successfully"
+      fails: "Invalid sign up"

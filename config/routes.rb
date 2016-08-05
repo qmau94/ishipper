@@ -1,10 +1,16 @@
 require "api_constraints"
 
 Rails.application.routes.draw do
-  namespace :api, defaults: {format: "json"} do
-    devise_for :users, only: :session
+  devise_for :users
 
-    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
+  namespace :api, defaults: {format: "json"} do
+    devise_scope :user do
+      post "sign_up", to: "registrations#create"
+      post "sign_in", to: "sessions#create"
+      delete "sign_out", to: "sessions#destroy"
+    end
+    scope module: :v1, constraints: ApiConstraints.new(version: 1,
+      default: true) do
       resources :users, only: [:update, :index]
     end
   end
