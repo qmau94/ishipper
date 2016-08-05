@@ -3,6 +3,7 @@ en:
     sign_in:
       fails: "Invalid email, password, or combination"
       success: "Sign in successfully"
+      not_actived: "User not actived"
     sign_out:
       success: "Sign out successfully"
     missing_params: "Missing user parameter"

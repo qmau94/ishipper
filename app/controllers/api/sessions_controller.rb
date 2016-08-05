@@ -12,10 +12,16 @@ class Api::SessionsController < Devise::SessionsController
     return invalid_login_attempt unless user
 
     if user.valid_password? user_params[:password]
-      sign_in user, store: false
-      user.update_attributes signed_in: true
-      render json: {message: t("api.sign_in.success"), data: {user: user}, code: 1}, status: :ok
-      return
+      if user.actived?
+        sign_in user, store: false
+        user.update_attributes signed_in: true
+        render json: {message: t("api.sign_in.success"), data: {user: user}, code: 1}, status: :ok
+        return
+      else
+        render json: {message: t("api.sign_in.not_actived"), data: {}, code: 0},
+          status: 401
+        return
+      end
     end
     invalid_login_attempt
   end
