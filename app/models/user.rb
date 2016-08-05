@@ -12,6 +12,8 @@ class User < ApplicationRecord
     :longitude, :plate_number, :status, :role, :rate, :pin,
     :password, :password_confirmation]
 
+  enum role: ["admin", "shop", "shipper"]
+
   def send_pin
     twilio_client = Twilio::REST::Client
       .new Rails.application.secrets.twilio_account_sid,
