@@ -1,12 +1,14 @@
 class Api::RegistrationsController < Devise::RegistrationsController
+  before_action :ensure_params_exist
+
   respond_to :json
-  
+
   def create
     user = User.new user_params
     if user.save
       render json: {
         message: t("api.sign_up.success"),
-        data: {user: user}, code: 1}, 
+        data: {user: user}, code: 1},
         status: 201
     else
       warden.custom_failure!
@@ -18,5 +20,12 @@ class Api::RegistrationsController < Devise::RegistrationsController
   private
   def user_params
     params.require(:user).permit User::ATTRIBUTES_PARAMS
+  end
+
+  def ensure_params_exist
+    return unless params[:user].blank?
+    render json:
+      {message: t("api.missing_params"), data: {}, code: 0},
+      status: 422
   end
 end
