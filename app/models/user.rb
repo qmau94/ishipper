@@ -1,17 +1,33 @@
 class User < ApplicationRecord
   acts_as_token_authenticatable
 
-  devise :database_authenticatable, :recoverable,
+  devise :database_authenticatable, :recoverable, :confirmable,
     :rememberable, :trackable, :validatable
 
   has_many :invoices, dependent: :destroy
-  has_many :reviews, dependent: :destroy
-  has_many :notifications, dependent: :destroy
+  has_many :active_reviews, class_name: "Review", foreign_key: "owner_id",
+    dependent: :destroy
+  has_many :passive_reviews, class_name: "Review", foreign_key: "recipient_id",
+    dependent: :destroy
+  has_many :active_notifications, class_name: "Notification",
+    foreign_key: "owner_id", dependent: :destroy
+  has_many :passive_notifications, class_name: "Notification",
+    foreign_key: "recipient_id", dependent: :destroy
+
+  enum status: [:unactive, :actived, :block_temporary, :blocked]
+
+  def email_required?
+    false
+  end
+
+  def confirmation_required?
+    false
+  end
 
   ATTRIBUTES_PARAMS = [:phone_number, :email, :address, :latitude,
     :longitude, :plate_number, :status, :role, :rate, :pin,
     :password, :password_confirmation]
-  
+
   validates :phone_number, uniqueness: true
 
   def email_required?
@@ -32,5 +48,22 @@ class User < ApplicationRecord
 
   def current_user? user
     self == user
+  end
+
+  def activate
+    self.actived!
+    self.pin = nil
+    return self.save
+  end
+
+  def reset_password params={}
+    self.password = params[:password]
+    self.password_confirmation = params[:password_confirmation]
+    self.pin = nil
+    return self.save
+  end
+
+  def check_pin pin
+    return self.pin == pin
   end
 end
