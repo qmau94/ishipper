@@ -7,3 +7,4 @@ en:
       success: "Sign out successfully"
     missing_params: "Missing user parameter"
     invalid_token: "Invalid token, email, or combination"
+    not_authenticated: "Not authenticated"

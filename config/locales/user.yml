@@ -1,0 +1,6 @@
+en:
+  users:
+    messages:
+      update_success: "Profile update successfully"
+      update_fails: "Could not update profile"
+      user_not_found: "User not found"

@@ -8,6 +8,10 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
+  ATTRIBUTES_PARAMS = [:phone_number, :email, :address, :latitude,
+    :longitude, :plate_number, :status, :role, :rate, :pin,
+    :password, :password_confirmation]
+
   def send_pin
     twilio_client = Twilio::REST::Client
       .new Rails.application.secrets.twilio_account_sid,
@@ -16,5 +20,9 @@ class User < ApplicationRecord
     self.update_attributes pin: pin
     twilio_client.messages.create to: "#{self.phone_number}",
       from: "#{Settings.from_phone_number}", body: I18n.t("your_pin", pin: pin)
+  end
+
+  def current_user? user
+    self == user
   end
 end
