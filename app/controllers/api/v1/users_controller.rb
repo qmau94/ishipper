@@ -19,7 +19,7 @@ class Api::V1::UsersController < Api::BaseController
         data: {user: @user}, code: 1}, status: 200
     else
       render json: {message: I18n.t("users.messages.update_fails"),
-        data: {errors: @user.errors}, code: 0}, status: 422
+        data: {errors: @user.errors}, code: 0}, status: 200
     end
   end
 
