@@ -19,7 +19,7 @@ class Api::SessionsController < Devise::SessionsController
         return
       else
         render json: {message: t("api.sign_in.not_actived"), data: {}, code: 0},
-          status: 401
+          status: 200
         return
       end
     end

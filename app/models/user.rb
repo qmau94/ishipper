@@ -40,10 +40,15 @@ class User < ApplicationRecord
     twilio_client = Twilio::REST::Client
       .new Rails.application.secrets.twilio_account_sid,
       Rails.application.secrets.twilio_auth_token
-    pin = SecureRandom.urlsafe_base64[0..3]
-    self.update_attributes pin: pin
-    twilio_client.messages.create to: "#{self.phone_number}",
-      from: "#{Settings.from_phone_number}", body: I18n.t("your_pin", pin: pin)
+    if self.valid_phone_number?
+      pin = SecureRandom.urlsafe_base64[0..3]
+      self.update_attributes pin: pin
+      twilio_client.messages.create to: "#{self.phone_number}",
+        from: "#{Settings.from_phone_number}", body: I18n.t("your_pin", pin: pin)
+      true
+    else
+      false
+    end
   end
 
   def current_user? user
@@ -65,5 +70,22 @@ class User < ApplicationRecord
 
   def check_pin pin
     return self.pin == pin
+  end
+
+  def valid_phone_number?
+    lookup_client = Twilio::REST::LookupsClient
+      .new Rails.application.secrets.twilio_account_sid,
+       Rails.application.secrets.twilio_auth_token
+    begin
+      response = lookup_client.phone_numbers.get self.phone_number
+      response.phone_number
+      return true
+      rescue => e
+      if e.code == 20404
+        return false
+      else
+        raise e
+      end
+    end
   end
 end

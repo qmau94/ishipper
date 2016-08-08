@@ -8,12 +8,15 @@ class Api::ConfirmationsController < Devise::ConfirmationsController
     if @user.block_temporary? or @user.blocked?
       render json:
         {message: t("api.user_invalid"), data: {}, code: 0},
-        status:401
-    else
-      @user.send_pin
-      render json:
-        {message: t("api.send_pin_success"), data: {}, code: 1},
         status: 200
+    else
+      if @user.send_pin
+        render json:
+          {message: t("api.send_pin_success"), data: {}, code: 1},
+          status: 200
+      else
+        phone_number_invalid
+      end
     end
   end
 
@@ -26,7 +29,7 @@ class Api::ConfirmationsController < Devise::ConfirmationsController
     else
       render json:
         {message: t("api.pin_invalid"), data: {}, code: 0},
-        status: 404
+        status: 200
     end
   end
 
@@ -42,7 +45,7 @@ class Api::ConfirmationsController < Devise::ConfirmationsController
 
   def phone_number_invalid
     render json:
-      {message: t("user.phone_number_invalid"), data: {}, code: 0},
+      {message: t("api.phone_number_invalid"), data: {}, code: 0},
       status: 401
   end
 

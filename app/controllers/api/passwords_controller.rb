@@ -11,7 +11,7 @@ class Api::PasswordsController < Devise::PasswordsController
     else
       render json:
         {message: I18n.t("api.pin_invalid"), data: {}, code: 0},
-        status: 404
+        status: 200
     end
   end
 
@@ -23,7 +23,7 @@ class Api::PasswordsController < Devise::PasswordsController
     else
       render json:
         {message: t("api.update.fail"), data: {user: @user.errors}, code: 0},
-        status: 401
+        status: 200
     end
   end
 
