@@ -41,7 +41,7 @@ class Api::PasswordsController < Devise::PasswordsController
   def phone_number_invalid
     render json:
       {message: t("api.phone_number_invalid"), data: {}, code: 0},
-      status: 401
+      status: 200
   end
 
   def ensure_params_exist

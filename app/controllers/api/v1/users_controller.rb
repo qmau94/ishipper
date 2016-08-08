@@ -32,6 +32,6 @@ class Api::V1::UsersController < Api::BaseController
     @user = User.find_by id: params[:id]
 
     render json: {message: I18n.t("users.messages.user_not_found"),
-      data: {}, code: 0}, status: 422 unless @user
+      data: {}, code: 0}, status: 200 unless @user
   end
 end
