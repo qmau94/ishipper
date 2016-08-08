@@ -8,11 +8,12 @@ Rails.application.routes.draw do
       post "sign_up", to: "registrations#create"
       post "sign_in", to: "sessions#create"
       delete "sign_out", to: "sessions#destroy"
+      get "confirmation", to: "confirmations#new"
       put "confirmation", to: "confirmations#update"
-      get "pin", to: "pins#new"
-      put "pin", to: "passwords#update"
+      get "password", to: "passwords#edit"
       put "password", to: "passwords#update"
     end
+
     scope module: :v1, constraints: ApiConstraints.new(version: 1,
       default: true) do
       resources :users, only: [:update, :index]

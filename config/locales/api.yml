@@ -21,3 +21,4 @@ en:
     update:
       success: Update success
       fail:  Update failure
+    user_invalid: User is invalid
