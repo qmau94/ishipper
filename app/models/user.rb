@@ -24,7 +24,7 @@ class User < ApplicationRecord
     false
   end
 
-  ATTRIBUTES_PARAMS = [:phone_number, :email, :address, :latitude,
+  ATTRIBUTES_PARAMS = [:phone_number, :name, :email, :address, :latitude,
     :longitude, :plate_number, :status, :role, :rate, :pin,
     :password, :password_confirmation]
 

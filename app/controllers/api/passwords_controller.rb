@@ -1,6 +1,19 @@
 class Api::PasswordsController < Devise::PasswordsController
   before_action :ensure_params_exist
   before_action :load_user_authentication
+  skip_before_action :assert_reset_token_passed
+
+  def edit
+    if @user.check_pin(user_params[:pin]) && @user.actived?
+      render json:
+        {message: I18n.t("api.pin_valid"), data: {user: @user}, code: 1},
+        status: 200
+    else
+      render json:
+        {message: I18n.t("api.pin_invalid"), data: {}, code: 0},
+        status: 404
+    end
+  end
 
   def update
     if @user.actived? && @user.reset_password(user_params)

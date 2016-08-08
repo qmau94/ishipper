@@ -4,8 +4,13 @@ module Authenticable
   end
 
   def authenticate_with_token!
-    render json: {message: I18n.t("api.not_authenticated"), data: {},
-      code: 0}, status: 401 unless current_user.present?
+    if current_user.nil?
+      render json: {message: I18n.t("api.not_authenticated"), data: {},
+        code: 0}, status: 401
+    elsif current_user.present? && current_user.unactive?
+      render json: {message: I18n.t("api.sign_in.not_active"), data: {},
+        code: 0}, status: 401
+    end
   end
 
   def user_signed_in?

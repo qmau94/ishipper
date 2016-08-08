@@ -6,6 +6,7 @@ class Api::RegistrationsController < Devise::RegistrationsController
   def create
     user = User.new user_params
     if user.save
+      user.send_pin
       render json: {
         message: t("api.sign_up.success"),
         data: {user: user}, code: 1},

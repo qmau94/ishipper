@@ -4,6 +4,19 @@ class Api::ConfirmationsController < Devise::ConfirmationsController
 
   respond_to :json
 
+  def new
+    if @user.block_temporary? or @user.blocked?
+      render json:
+        {message: t("api.user_invalid"), data: {}, code: 0},
+        status:401
+    else
+      @user.send_pin
+      render json:
+        {message: t("api.send_pin_success"), data: {}, code: 1},
+        status: 200
+    end
+  end
+
   def update
     if @user.check_pin(user_params[:pin]) && @user.unactive?
       @user.activate
@@ -13,7 +26,7 @@ class Api::ConfirmationsController < Devise::ConfirmationsController
     else
       render json:
         {message: t("api.pin_invalid"), data: {}, code: 0},
-        status: 204
+        status: 404
     end
   end
 
