@@ -32,4 +32,10 @@ class Api::RegistrationsController < Devise::RegistrationsController
       {message: t("api.missing_params"), data: {}, code: 0},
       status: 422
   end
+
+  def phone_number_invalid
+    render json:
+      {message: t("api.phone_number_invalid"), data: {}, code: 0},
+      status: 200
+  end
 end
