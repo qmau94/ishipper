@@ -70,3 +70,40 @@ User.create! name: "shop1",
   status: "actived",
   role: 1,
   password: "123456"
+
+Invoice.create! name: "invoice1",
+  latitude_start: 21.0093557,
+  longitude_start: 105.8554427,
+  latitude_finish: 21.0066625,
+  longitude_finish: 105.8157497,
+  status: 1
+Invoice.create! name: "invoice2",
+  latitude_start: 21.0072829,
+  longitude_start: 105.8413891,
+  latitude_finish: 21.0093557,
+  longitude_finish: 105.8554427,
+  status: 0
+Invoice.create! name: "invoice3",
+  latitude_start: 21.0061393,
+  longitude_start: 105.8419748,
+  latitude_finish: 21.0072829,
+  longitude_finish: 105.8413891,
+  status: 0
+Invoice.create! name: "invoice4",
+  latitude_start: 21.0144139,
+  longitude_start: 105.8031754,
+  latitude_finish: 21.0061393,
+  longitude_finish: 105.8419748,
+  status: 0
+Invoice.create! name: "invoice5",
+  latitude_start: 21.0092948,
+  longitude_start: 105.8099247,
+  latitude_finish: 21.0144139,
+  longitude_finish: 105.8031754,
+  status: 0
+Invoice.create! name: "invoice6",
+  latitude_start: 21.0066625,
+  longitude_start: 105.8157497,
+  latitude_finish: 21.0092948,
+  longitude_finish: 105.8099247,
+  status: 0
