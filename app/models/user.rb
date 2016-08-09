@@ -42,7 +42,7 @@ class User < ApplicationRecord
       Rails.application.secrets.twilio_auth_token
     if self.valid_phone_number?
       begin
-        pin = SecureRandom.urlsafe_base64[0..3]
+        pin = SecureRandom.urlsafe_base64[0..7]
         self.update_attributes pin: pin
         twilio_client.messages.create to: "#{self.phone_number}",
           from: "#{Settings.from_phone_number}", body: I18n.t("your_pin", pin: pin)
@@ -69,10 +69,15 @@ class User < ApplicationRecord
   end
 
   def reset_password params={}
-    self.password = params[:password]
-    self.password_confirmation = params[:password_confirmation]
-    self.pin = nil
-    return self.save
+    check = if check_pin params[:pin]
+      self.password = params[:password]
+      self.password_confirmation = params[:password_confirmation]
+      self.pin = nil
+      self.save
+    else
+      false
+    end
+    check
   end
 
   def check_pin pin
