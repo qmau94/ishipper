@@ -1,4 +1,6 @@
 class Api::RegistrationsController < Devise::RegistrationsController
+  include Confirm
+
   before_action :ensure_params_exist
 
   respond_to :json
@@ -16,7 +18,7 @@ class Api::RegistrationsController < Devise::RegistrationsController
       end
     else
       warden.custom_failure!
-      render json: {message: user.errors.messages, data: {}, code: 0},
+      render json: {message: error_messages(user.errors.messages), data: {}, code: 0},
         status: 200
     end
   end
@@ -24,18 +26,5 @@ class Api::RegistrationsController < Devise::RegistrationsController
   private
   def user_params
     params.require(:user).permit User::ATTRIBUTES_PARAMS
-  end
-
-  def ensure_params_exist
-    return unless params[:user].blank?
-    render json:
-      {message: t("api.missing_params"), data: {}, code: 0},
-      status: 422
-  end
-
-  def phone_number_invalid
-    render json:
-      {message: t("api.phone_number_invalid"), data: {}, code: 0},
-      status: 200
   end
 end

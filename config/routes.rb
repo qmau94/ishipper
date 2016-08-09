@@ -10,7 +10,8 @@ Rails.application.routes.draw do
       delete "sign_out", to: "sessions#destroy"
       get "confirmation", to: "confirmations#new"
       put "confirmation", to: "confirmations#update"
-      get "password", to: "passwords#edit"
+      get "password", to: "passwords#new"
+      post "password", to: "passwords#create"
       put "password", to: "passwords#update"
     end
 

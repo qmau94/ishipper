@@ -21,4 +21,6 @@ en:
     update:
       success: Update success
       fail:  Update failure
-    user_invalid: User is invalid
+    user_block: User is blocked!
+    user_actived: User has actived before!
+    invalid: " is invalid!"
