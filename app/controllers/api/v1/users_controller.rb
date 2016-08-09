@@ -1,7 +1,7 @@
 class Api::V1::UsersController < Api::BaseController
   before_action :find_user, only: :update
   before_action :correct_user, only: :update
-  before_action :ensure_params_exist, only: :index
+  before_action :ensure_params_exist, only: [:index, :update]
 
   def index
     users = User.near [params[:user][:latitude], params[:user][:longitude]],
@@ -36,13 +36,5 @@ class Api::V1::UsersController < Api::BaseController
 
     render json: {message: I18n.t("users.messages.user_not_found"),
       data: {}, code: 0}, status: 422 unless @user
-  end
-
-  def ensure_params_exist
-    if params[:user].nil? || params[:user][:latitude].blank? ||
-      params[:user][:longitude].blank? || params[:user][:distance].blank?
-      render json: {message: I18n.t("api.missing_params"), data: {}, code: 0},
-        status: 422
-    end
   end
 end

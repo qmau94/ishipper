@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :recoverable, :confirmable,
     :rememberable, :trackable, :validatable
 
-  geocoded_by :address
+  geocoded_by :current_location
   reverse_geocoded_by :latitude, :longitude, if: :address_changed?
   after_validation :geocode, :reverse_geocode
 
