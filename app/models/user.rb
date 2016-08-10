@@ -26,7 +26,7 @@ class User < ApplicationRecord
 
   ATTRIBUTES_PARAMS = [:phone_number, :name, :email, :address, :latitude,
     :longitude, :plate_number, :status, :role, :rate, :pin,
-    :password, :password_confirmation]
+    :password, :password_confirmation, :current_password]
 
   validates :phone_number, uniqueness: true
 
@@ -42,7 +42,8 @@ class User < ApplicationRecord
       Rails.application.secrets.twilio_auth_token
     if self.valid_phone_number?
       begin
-        pin = SecureRandom.urlsafe_base64[0..7]
+        # pin = SecureRandom.urlsafe_base64[0..7]
+        pin = "12345678"
         self.update_attributes pin: pin
         twilio_client.messages.create to: "#{self.phone_number}",
           from: "#{Settings.from_phone_number}", body: I18n.t("your_pin", pin: pin)
@@ -64,7 +65,7 @@ class User < ApplicationRecord
 
   def activate
     self.actived!
-    self.pin = nil
+    # self.pin = nil
     return self.save
   end
 

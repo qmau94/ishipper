@@ -1,4 +1,6 @@
 class Api::SessionsController < Devise::SessionsController
+  include Confirm
+
   protect_from_forgery with: :null_session
   skip_before_action :verify_authenticity_token
   skip_before_action :verify_signed_out_user
@@ -37,11 +39,6 @@ class Api::SessionsController < Devise::SessionsController
   end
 
   protected
-  def ensure_params_exist
-    return unless params[:user].blank?
-    render json: {message: t("api.missing_params"), data: {}, code: 0}, status: 422
-  end
-
   def invalid_login_attempt
     render json: {message: t("api.sign_in.fails"), data: {}, code: 0}, status: 200
   end
