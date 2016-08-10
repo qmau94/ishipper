@@ -18,9 +18,7 @@ class Api::BaseController < ActionController::API
     else
       true
     end
-
-    render json:
-      {message: I18n.t("api.missing_params"), data: {}, code: 0},
+    render json: {message: I18n.t("api.missing_params"), data: {}, code: 0},
       status: 422 if missing_params
   end
 end
