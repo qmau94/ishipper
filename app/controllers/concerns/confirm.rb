@@ -1,13 +1,13 @@
 module Confirm
   def ensure_params_exist
     return unless params[:user].blank?
-    render json: {message: t("api.missing_params"), data: {}, code: 0}, status: 422
+    render json: {message: I18n.t("api.missing_params"), data: {}, code: 0}, status: 422
   end
 
   def error_messages object
     error = ""
     object.each do |messageType, message|
-      error << messageType.to_s.classify + t("api.invalid") + "\n"
+      error << messageType.to_s.classify + I18n.t("api.invalid") + "\n"
     end
     error
   end
@@ -19,7 +19,7 @@ module Confirm
 
   def phone_number_invalid
     render json:
-      {message: t("api.phone_number_invalid"), data: {}, code: 0},
+      {message: I18n.t("api.phone_number_invalid"), data: {}, code: 0},
       status: 200
   end
 end

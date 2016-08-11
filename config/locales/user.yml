@@ -6,3 +6,4 @@ en:
       user_not_found: "User not found"
       get_shipper_success: "Get shipper success"
       get_shipper_fails: "No shipper around here"
+      current_password_invalid: CurrentPassword invalid

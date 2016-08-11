@@ -1,13 +1,13 @@
 en:
   api:
     sign_in:
-      fails: "Invalid email, password, or combination"
+      fails: "Invalid phone number, password, or combination"
       success: "Sign in successfully"
       not_actived: "User not actived"
     sign_out:
       success: "Sign out successfully"
     missing_params: "Missing user parameter"
-    invalid_token: "Invalid token, email, or combination"
+    invalid_token: "Invalid token, phone number, or combination"
     not_authenticated: "Not authenticated"
     sign_up:
       success: "Sign up successfully"
