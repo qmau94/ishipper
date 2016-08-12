@@ -20,14 +20,7 @@ class User < ApplicationRecord
     foreign_key: "recipient_id", dependent: :destroy
 
   enum status: [:unactive, :actived, :block_temporary, :blocked]
-
-  def email_required?
-    false
-  end
-
-  def confirmation_required?
-    false
-  end
+  enum role: ["admin", "shop", "shipper"]
 
   ATTRIBUTES_PARAMS = [:phone_number, :name, :email, :address, :latitude,
     :longitude, :plate_number, :status, :role, :rate, :pin,
@@ -39,7 +32,9 @@ class User < ApplicationRecord
     false
   end
 
-  enum role: ["admin", "shop", "shipper"]
+  def confirmation_required?
+    false
+  end
 
   def send_pin
     twilio_client = Twilio::REST::Client

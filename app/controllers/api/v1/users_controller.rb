@@ -1,8 +1,12 @@
 class Api::V1::UsersController < Api::BaseController
   before_action :ensure_params_exist
-  before_action :find_user, only: :update
+  before_action :find_user, only: [:show, :update]
   before_action :correct_user, only: :update
   before_action :ensure_params_exist, only: [:index, :update]
+
+  def show
+    render json: {message: {}, data: {user: @user}, code: 1}, status: 200
+  end
 
   def index
     users = User.near [params[:user][:latitude], params[:user][:longitude]],
