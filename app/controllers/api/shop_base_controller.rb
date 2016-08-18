@@ -4,8 +4,8 @@ class Api::ShopBaseController < Api::BaseController
   private
   def verify_shop
     unless current_user.shop?
-      render json: {message: I18n.t("shop_ability"), data: {}, code: 0},
-        status: 403
+      render json: {message: I18n.t("users.messages.not_authorize"), data: {},
+        code: 0}, status: 403
     end
   end
 end

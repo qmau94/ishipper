@@ -7,7 +7,7 @@ class InvoiceStatus
 
   def update_status
     @invoice.update_attributes status: @status
-    if @invoice.cancel?
+    if @invoice.cancel? && current_user.shipper?
       @user_invoice.destroy
     else
       @user_invoice.update_attributes status: @status
