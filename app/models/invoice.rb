@@ -9,7 +9,12 @@ class Invoice < ApplicationRecord
 
   belongs_to :user
 
-  enum status: [:init, :waitting, :shipping, :shipped, :finished, :cancel]
+  ATTRIBUTES_PARAMS = [:name, :address_start, :address_finish, :delivery_time,
+    :distance, :description, :price, :shipping_price, :status, :weight,
+    :customer_name, :customer_number, :latitude_start, :longitude_start,
+    :latitude_finish, :longitude_finish]
+
+  enum status: [:init, :waiting, :shipping, :shipped, :finished, :cancel]
 
   private
   def custom_geocode
