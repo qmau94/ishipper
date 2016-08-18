@@ -28,8 +28,9 @@ class Api::SessionsController < Devise::SessionsController
   end
 
   def destroy
-    if @user.signed_in? && @user.authentication_token == user_params[:authentication_token]
+    if @user.authentication_token == user_params[:authentication_token]
       sign_out @user
+      generate_authentication_token
       render json: {message: t("api.sign_out.success"), data: {}, code: 1}, status: 200
     else
       render json: {message: t("api.invalid_token"), data: {}, code: 0}, status: 200
@@ -43,5 +44,9 @@ class Api::SessionsController < Devise::SessionsController
 
   def invalid_login_attempt
     render json: {message: t("api.sign_in.fails"), data: {}, code: 0}, status: 200
+  end
+
+  def generate_authentication_token
+    @user.update_attributes authentication_token: Devise.friendly_token
   end
 end
