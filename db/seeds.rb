@@ -107,3 +107,38 @@ Invoice.create! name: "invoice6",
   latitude_finish: 21.0092948,
   longitude_finish: 105.8099247,
   status: 0
+Invoice.create! name: "invoice7",
+  latitude_start: 21.0066625,
+  longitude_start: 105.8157497,
+  latitude_finish: 21.0092948,
+  longitude_finish: 105.8099247,
+  status: 2
+Invoice.create! name: "invoice8",
+  latitude_start: 21.0066625,
+  longitude_start: 105.8157497,
+  latitude_finish: 21.0092948,
+  longitude_finish: 105.8099247,
+  status: 3
+Invoice.create! name: "invoice9",
+  latitude_start: 21.0066625,
+  longitude_start: 105.8157497,
+  latitude_finish: 21.0092948,
+  longitude_finish: 105.8099247,
+  status: 1
+Invoice.create! name: "invoice10",
+  latitude_start: 21.0066625,
+  longitude_start: 105.8157497,
+  latitude_finish: 21.0092948,
+  longitude_finish: 105.8099247,
+  status: 3
+UserInvoice.create! status: 0,
+  user_id: 1, invoice_id: 6
+UserInvoice.create! status: 2,
+  user_id: 1, invoice_id: 7
+UserInvoice.create! status: 3,
+  user_id: 1, invoice_id: 8
+UserInvoice.create! status: 1,
+  user_id: 1, invoice_id: 9
+UserInvoice.create! status: 3,
+  user_id: 1, invoice_id: 10
+
