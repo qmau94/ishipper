@@ -1,6 +1,6 @@
 class Api::V1::UsersController < Api::BaseController
   before_action :ensure_params_exist
-  before_action :find_user, only: [:show, :update]
+  before_action :find_object, only: [:show, :update]
   before_action :correct_user, only: :update
   before_action :ensure_params_exist, only: [:index, :update]
 
@@ -34,12 +34,5 @@ class Api::V1::UsersController < Api::BaseController
   private
   def user_params
     params.require(:user).permit User::ATTRIBUTES_PARAMS
-  end
-
-  def find_user
-    @user = User.find_by id: params[:id]
-
-    render json: {message: I18n.t("users.messages.user_not_found"),
-      data: {}, code: 0}, status: 200 unless @user
   end
 end

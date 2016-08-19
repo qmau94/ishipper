@@ -3,3 +3,6 @@ en:
     messages:
       get_invoices_success: "Get invoices success"
       get_invoices_fails: "No invoices around here"
+      invoice_not_found: "Invoice not found"
+      update_success: "Update invoice successful"
+      invoice_error_status: "This status of invoice is error"

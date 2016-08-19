@@ -19,6 +19,9 @@ Rails.application.routes.draw do
       default: true) do
       resources :users, only: [:show, :update, :index]
       resources :invoices, only: :index
+      namespace :shipper do
+        resources :invoices, only: :update
+      end
     end
   end
 end
