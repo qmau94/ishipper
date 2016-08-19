@@ -1,5 +1,16 @@
 class Api::V1::Shipper::InvoicesController < Api::ShipperBaseController
   before_action :find_object, only: :update
+  before_action :ensure_params_true, only: :index
+
+  def index
+    invoices =  if params[:status] == "all" 
+      current_user.all_user_invoices
+    else
+      current_user.all_user_invoices.send params[:status]
+    end
+    render json: {message: I18n.t("invoices.messages.get_invoices_success"),
+      data: {invoices: invoices}, code: 1}, status: 200
+  end
 
   def update
     @user_invoice = @invoice.user_invoices.find_by_user_id current_user.id
@@ -21,6 +32,15 @@ class Api::V1::Shipper::InvoicesController < Api::ShipperBaseController
       true
     else
       false
+    end
+  end
+
+  def ensure_params_true
+    statuses = UserInvoice.statuses
+    statuses["all"] = 6
+    unless (params[:status].nil? || params[:status].in?(statuses)) && params.has_key?(:status)
+      render json: {message: I18n.t("invoices.messages.missing_params"),
+      data: {}, code: 0}, status: 422
     end
   end
 end

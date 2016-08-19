@@ -6,4 +6,4 @@ en:
       invoice_not_found: "Invoice not found"
       update_success: "Update invoice successful"
       invoice_error_status: "This status of invoice is error"
-      missing_params: "Missing user parameter"
+      missing_params: "Missing invoices parameter"

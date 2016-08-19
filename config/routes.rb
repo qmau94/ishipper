@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       resources :users, only: [:show, :update, :index]
       resources :invoices, only: :index
       namespace :shipper do
-        resources :invoices, only: :update
+        resources :invoices, only: [:update, :index]
       end
       namespace :shop do
         resources :invoices, only: :index

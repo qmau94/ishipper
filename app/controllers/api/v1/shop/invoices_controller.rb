@@ -7,13 +7,8 @@ class Api::V1::Shop::InvoicesController < Api::ShopBaseController
     else
       current_user.invoices.send params[:status]
     end
-    if invoices.any?
-      render json: {message: I18n.t("invoices.messages.get_invoices_success"),
-        data: {invoice: invoices}, code: 1}, status: 200
-    else
-      render json: {message: I18n.t("invoices.messages.get_invoices_fails"),
-        data: {}, code: 1}, status: 200
-    end
+    render json: {message: I18n.t("invoices.messages.get_invoices_success"),
+      data: {invoice: invoices}, code: 1}, status: 200
   end
 
   private

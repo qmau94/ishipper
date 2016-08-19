@@ -28,3 +28,4 @@ en:
   login_error: Error with your login or password
   missing_params: missing user_login parameter
   failed: "false"
+  ship_ability: "You are not a shipper, you can not perform this action"
