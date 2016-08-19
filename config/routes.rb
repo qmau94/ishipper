@@ -23,7 +23,7 @@ Rails.application.routes.draw do
         resources :invoices, only: [:update, :index]
       end
       namespace :shop do
-        resources :invoices, only: :index
+        resources :invoices, only: [:index, :update]
       end
     end
   end
