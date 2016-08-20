@@ -1,6 +1,6 @@
-class CreateInvoicesHistories < ActiveRecord::Migration[5.0]
+class CreateInvoiceHistories < ActiveRecord::Migration[5.0]
   def change
-    create_table :invoices_histories do |t|
+    create_table :invoice_histories do |t|
       t.string :name
       t.string :address
       t.string :delivery_time
@@ -10,7 +10,7 @@ class CreateInvoicesHistories < ActiveRecord::Migration[5.0]
       t.float :shipping_price
       t.float :weight
       t.integer :status
-      t.references :invoice, foreign_key: true
+      t.integer :invoice_id
 
       t.timestamps
     end

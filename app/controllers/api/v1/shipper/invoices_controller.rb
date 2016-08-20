@@ -3,7 +3,7 @@ class Api::V1::Shipper::InvoicesController < Api::ShipperBaseController
   before_action :ensure_params_true, only: :index
 
   def index
-    invoices =  if params[:status] == "all" 
+    invoices =  if params[:status] == "all"
       current_user.all_user_invoices
     else
       current_user.all_user_invoices.send params[:status]
@@ -16,8 +16,8 @@ class Api::V1::Shipper::InvoicesController < Api::ShipperBaseController
     @user_invoice = @invoice.user_invoices.find_by_user_id current_user.id
     if check_update_status? && InvoiceStatus.new(@invoice, @user_invoice,
       params[:status]).update_status
-        render json: {message: I18n.t("invoices.messages.update_success"),
-          data: {invoice: @invoice}, code: 1}, status: 200
+      render json: {message: I18n.t("invoices.messages.update_success"),
+        data: {invoice: @invoice}, code: 1}, status: 200
     else
       render json: {message: I18n.t("invoices.messages.invoice_error_status"),
         data: {}, code: 0}, status: 200
