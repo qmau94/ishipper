@@ -3,7 +3,7 @@ class Api::V1::Shipper::InvoicesController < Api::ShipperBaseController
   before_action :ensure_params_true, only: :index
 
   def index
-    invoices =  if params[:status] == "all"
+    invoices = if params[:status] == "all"
       current_user.all_user_invoices
     else
       current_user.all_user_invoices.send params[:status]
