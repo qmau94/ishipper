@@ -12,6 +12,21 @@
 
 ActiveRecord::Schema.define(version: 20160803021915) do
 
+  create_table "invoice_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "delivery_time"
+    t.float    "distance",       limit: 24
+    t.string   "description"
+    t.float    "price",          limit: 24
+    t.float    "shipping_price", limit: 24
+    t.float    "weight",         limit: 24
+    t.integer  "status"
+    t.integer  "invoice_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
   create_table "invoices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "address_start"
@@ -31,22 +46,6 @@ ActiveRecord::Schema.define(version: 20160803021915) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.index ["user_id"], name: "index_invoices_on_user_id", using: :btree
-  end
-
-  create_table "invoices_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.string   "address"
-    t.string   "delivery_time"
-    t.float    "distance",       limit: 24
-    t.string   "description"
-    t.float    "price",          limit: 24
-    t.float    "shipping_price", limit: 24
-    t.float    "weight",         limit: 24
-    t.integer  "status"
-    t.integer  "invoice_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.index ["invoice_id"], name: "index_invoices_histories_on_invoice_id", using: :btree
   end
 
   create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -69,6 +68,13 @@ ActiveRecord::Schema.define(version: 20160803021915) do
     t.index ["invoice_id"], name: "index_reviews_on_invoice_id", using: :btree
   end
 
+  create_table "user_invoice_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "status"
+    t.integer  "user_invoice_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "user_invoices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "status"
     t.integer  "user_id"
@@ -77,14 +83,6 @@ ActiveRecord::Schema.define(version: 20160803021915) do
     t.datetime "updated_at", null: false
     t.index ["invoice_id"], name: "index_user_invoices_on_invoice_id", using: :btree
     t.index ["user_id"], name: "index_user_invoices_on_user_id", using: :btree
-  end
-
-  create_table "user_invoices_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "status"
-    t.integer  "user_invoice_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["user_invoice_id"], name: "index_user_invoices_histories_on_user_invoice_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -122,9 +120,7 @@ ActiveRecord::Schema.define(version: 20160803021915) do
   end
 
   add_foreign_key "invoices", "users"
-  add_foreign_key "invoices_histories", "invoices"
   add_foreign_key "reviews", "invoices"
   add_foreign_key "user_invoices", "invoices"
   add_foreign_key "user_invoices", "users"
-  add_foreign_key "user_invoices_histories", "user_invoices"
 end
