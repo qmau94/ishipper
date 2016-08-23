@@ -9,7 +9,7 @@ class Api::V1::Shop::InvoicesController < Api::ShopBaseController
       current_user.invoices.send params[:status]
     end
     render json: {message: I18n.t("invoices.messages.get_invoices_success"),
-      data: {invoice: invoices}, code: 1}, status: 200
+      data: {invoices: invoices}, code: 1}, status: 200
   end
 
   def update
