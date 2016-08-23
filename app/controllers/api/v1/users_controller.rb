@@ -5,7 +5,7 @@ class Api::V1::UsersController < Api::BaseController
   before_action :ensure_params_exist, only: [:index, :update]
 
   def show
-    render json: {message: {}, data: {user: @user}, code: 1}, status: 200
+    render json: {message: I18n.t("users.show.success"), data: {user: @user}, code: 1}, status: 200
   end
 
   def index

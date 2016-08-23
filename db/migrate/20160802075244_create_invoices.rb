@@ -13,8 +13,10 @@ class CreateInvoices < ActiveRecord::Migration[5.0]
       t.string :description
       t.float :price
       t.float :shipping_price
-      t.integer :status
+      t.integer :status, default: :init
       t.float :weight
+      t.string :customer_name
+      t.string :customer_number
       t.references :user, foreign_key: true
 
       t.timestamps

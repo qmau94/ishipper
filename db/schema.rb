@@ -14,17 +14,24 @@ ActiveRecord::Schema.define(version: 20160803021915) do
 
   create_table "invoice_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.string   "address"
+    t.string   "address_start"
+    t.float    "latitude_start",   limit: 24
+    t.float    "longitude_start",  limit: 24
+    t.string   "address_finish"
+    t.float    "latitude_finish",  limit: 24
+    t.float    "longitude_finish", limit: 24
     t.string   "delivery_time"
-    t.float    "distance",       limit: 24
+    t.float    "distance",         limit: 24
     t.string   "description"
-    t.float    "price",          limit: 24
-    t.float    "shipping_price", limit: 24
-    t.float    "weight",         limit: 24
+    t.float    "price",            limit: 24
+    t.float    "shipping_price",   limit: 24
     t.integer  "status"
+    t.float    "weight",           limit: 24
+    t.string   "customer_name"
+    t.string   "customer_number"
     t.integer  "invoice_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "invoices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -42,6 +49,8 @@ ActiveRecord::Schema.define(version: 20160803021915) do
     t.float    "shipping_price",   limit: 24
     t.integer  "status"
     t.float    "weight",           limit: 24
+    t.string   "customer_name"
+    t.string   "customer_number"
     t.integer  "user_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false

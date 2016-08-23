@@ -8,3 +8,5 @@ en:
       get_shipper_fails: "No shipper around here"
       current_password_invalid: CurrentPassword invalid
       not_authorize: You are not authorized to perform this action!
+    show:
+      success: "Get user successfully"
