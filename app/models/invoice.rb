@@ -5,13 +5,15 @@ class Invoice < ApplicationRecord
 
   has_many :user_invoices, dependent: :destroy
   has_many :reviews, dependent: :destroy
-
+  has_many :invoice_histories, dependent: :destroy
+  
   belongs_to :user
 
   ATTRIBUTES_PARAMS = [:name, :address_start, :address_finish, :delivery_time,
     :distance, :description, :price, :shipping_price, :status, :weight,
     :customer_name, :customer_number, :latitude_start, :longitude_start,
     :latitude_finish, :longitude_finish]
+ 
 
   enum status: [:init, :waiting, :shipping, :shipped, :finished, :cancel]
 

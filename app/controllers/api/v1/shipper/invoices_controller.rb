@@ -1,5 +1,5 @@
 class Api::V1::Shipper::InvoicesController < Api::ShipperBaseController
-  before_action :find_object, only: :update
+  before_action :find_object, only: [:update, :show]
   before_action :ensure_params_true, only: :index
 
   def index
@@ -10,6 +10,16 @@ class Api::V1::Shipper::InvoicesController < Api::ShipperBaseController
     end
     render json: {message: I18n.t("invoices.messages.get_invoices_success"),
       data: {invoices: invoices}, code: 1}, status: 200
+  end
+
+   def show
+    if @invoice.present?
+      render json: {message: I18n.t("invoices.show.success"),
+        data: {invoice: @invoice}, code: 1}, status: 200
+    else
+      render json: {message: I18n.t("invoices.messages.not_found"),
+        data: {}, code: 0}, status: 200 
+    end 
   end
 
   def update

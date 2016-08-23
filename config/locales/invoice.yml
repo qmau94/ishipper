@@ -7,3 +7,14 @@ en:
       update_success: "Update invoice successful"
       invoice_error_status: "This status of invoice is error"
       missing_params: "Missing invoices parameter"
+      not_found: "Could not found invoice"
+      can_not_show: "You don't have permission to view this invoice"
+    create:
+      success: "Invoice created"
+      fail: "Could not create invoice"
+    update:
+      success: "Invoice updated"
+    delete:
+      success: "Invoice deleted"
+    show: 
+      success: "Show invoice successfully"
