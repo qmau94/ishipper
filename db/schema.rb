@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20160803021915) do
     t.integer  "owner_id"
     t.integer  "recipient_id"
     t.integer  "invoice_id"
-    t.integer  "type"
+    t.integer  "review_type"
     t.float    "rating_point", limit: 24
     t.string   "content"
     t.datetime "created_at",              null: false

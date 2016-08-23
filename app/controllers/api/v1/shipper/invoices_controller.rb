@@ -25,7 +25,7 @@ class Api::V1::Shipper::InvoicesController < Api::ShipperBaseController
   def update
     @user_invoice = @invoice.user_invoices.find_by_user_id current_user.id
     if check_update_status? && InvoiceStatus.new(@invoice, @user_invoice,
-      params[:status]).update_status
+      params[:status]).update_status current_user
       render json: {message: I18n.t("invoices.messages.update_success"),
         data: {invoice: @invoice}, code: 1}, status: 200
     else
