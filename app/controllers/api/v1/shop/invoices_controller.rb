@@ -21,7 +21,7 @@ class Api::V1::Shop::InvoicesController < Api::ShopBaseController
     invoice = current_user.invoices.build invoice_params
     if invoice.save
       render json: {message: I18n.t("invoices.create.success"),
-        data: {invoice: invoice}, code: 1}, status: 201 
+        data: {invoice: invoice}, code: 1}, status: 201
     else
       render json: {message: I18n.t("invoices.create.fail"), data: {},
         code: 0}, status: 200
@@ -32,7 +32,7 @@ class Api::V1::Shop::InvoicesController < Api::ShopBaseController
     if params[:status]
       @user_invoice = @invoice.user_invoices.find_by_user_id current_user.id
       if check_update_status? && InvoiceStatus.new(@invoice, @user_invoice,
-        params[:status]).update_status
+        params[:status]).update_status current_user
         render json: {message: I18n.t("invoices.messages.update_success"),
           data: {invoice: @invoice}, code: 1}, status: 200
       else
@@ -48,7 +48,6 @@ class Api::V1::Shop::InvoicesController < Api::ShopBaseController
           code: 0}, status: 200
       end
     end
-    
   end
 
   def destroy

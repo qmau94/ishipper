@@ -5,17 +5,14 @@ class InvoiceStatus
     @status = status
   end
 
-  def update_status
+  def update_status user
     Invoice.transaction do
       UserInvoice.transaction do
         @invoice.update_attributes status: @status
         if @invoice.cancel?
-          if @user_invoice.user.shipper?
-            InvoiceHistoryCreator.new(@invoice).create_all_history(@user_invoice,
-              @status)
+          if user.shipper?
             @user_invoice.destroy
-          elsif @user_invoice.user.shop?
-            InvoiceHistoryCreator.new(@invoice).create_invoice_history
+          elsif user.shop?
             @invoice.user_invoices.each do |user_invoice|
               InvoiceHistoryCreator.new(@invoice).create_user_history(@user_invoice,
                 @status)
