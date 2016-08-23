@@ -76,11 +76,11 @@ ActiveRecord::Schema.define(version: 20160803021915) do
   end
 
   create_table "user_invoices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "status"
+    t.integer  "status",     default: 0
     t.integer  "user_id"
     t.integer  "invoice_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.index ["invoice_id"], name: "index_user_invoices_on_invoice_id", using: :btree
     t.index ["user_id"], name: "index_user_invoices_on_user_id", using: :btree
   end

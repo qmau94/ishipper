@@ -1,0 +1,4 @@
+en:
+  user_invoices:
+    create_success: Receive invoice success, please waiting for shop accept
+    create_danger: Receive invoice fail

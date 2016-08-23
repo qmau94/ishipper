@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :invoices, only: :index
       namespace :shipper do
         resources :invoices, only: [:update, :index]
+        resources :user_invoices, only: :create
       end
       namespace :shop do
         resources :invoices, only: [:index, :update]
